@@ -113,19 +113,20 @@ public class wybor {
     public string rola = "nic";
 
     public void selectRole(Character myHero, mag Mag, Łucznik lucznik) {
+        Console.WriteLine("Obecnie działa jedynie klasa rycerz, reszta jest w trakcie robienia");
         Console.WriteLine("Jaką klasę wybierasz rycerz | mag | łucznik ");
         string rola = Console.ReadLine();
         Console.WriteLine ("---------------------------------------------------");
         if (rola=="rycerz"){
-            Console.WriteLine ("Nazwa: "+myHero.name+ "\nHP Bohatera: "+myHero.hp+"\nMana Bohatera: "+myHero.mana+"\nGold Bohatera: "+myHero.gold);
+            Console.WriteLine ("Nazwa: "+myHero.name+ "\nHP Bohatera: "+myHero.hp+"\nMana Bohatera: "+myHero.mana+"\nRodzaj ataku: "+myHero.typ_ataku+"\nGold Bohatera: "+myHero.gold);
             this.rola = rola;
         }
         else if (rola=="mag"){
-            Console.WriteLine ("Nazwa: "+Mag.Mag_name+ "\nHP Bohatera: "+Mag.Mag_hp+"\nMana Bohatera: "+Mag.Mag_mana+"\nGold Bohatera: "+Mag.gold);
+            Console.WriteLine ("Nazwa: "+Mag.Mag_name+ "\nHP Bohatera: "+Mag.Mag_hp+"\nMana Bohatera: "+Mag.Mag_mana+"\nRodzaj ataku: "+Mag.typ_ataku+"\nGold Bohatera: "+Mag.gold);
             this.rola = rola;
         }
         else if (rola=="łucznik"){
-            Console.WriteLine ("Nazwa: "+lucznik.lucznik_name+ "\nHP Bohatera: "+lucznik.lucznik_hp+"\nMana Bohatera: "+lucznik.lucznik_mana+"\nGold Bohatera: "+lucznik.gold);
+            Console.WriteLine ("Nazwa: "+lucznik.lucznik_name+ "\nHP Bohatera: "+lucznik.lucznik_hp+"\nMana Bohatera: "+lucznik.lucznik_mana+"\nRodzaj ataku: "+lucznik.typ_ataku+"\nGold Bohatera: "+lucznik.gold);
             this.rola = rola;
         } 
         else if(this.rola != "rycerz" || this.rola != "mag" || this.rola != "lucznik"){
@@ -143,7 +144,7 @@ public class Program
 {
     public static void Main()
     {
-
+        
         Character myHero = new Character();
         Enemy ORK = new Enemy();
         mag Mag = new mag();
@@ -151,7 +152,7 @@ public class Program
         wybor te_czy_te = new wybor();
         Random rnd = new Random();
         duch_lochow sprzedawca = new duch_lochow();
-
+        
         Console.WriteLine("----------WITAJ W DUNGEON OF JACA----------");
         Console.WriteLine("Wchodzisz do miejsca pełnego magii i róznorakich stworzeń");
         Console.WriteLine("Twoim celem jest pokananie LeJaca największego i najgorszego z Jaców");
@@ -160,86 +161,85 @@ public class Program
 
         
         te_czy_te.selectRole(myHero, Mag, lucznik);
+        myHero.rycerz_historia(ORK, rnd, sprzedawca, te_czy_te);
+        // if (te_czy_te.rola=="rycerz"){
+        //         Console.WriteLine ("Trafiasz na Orka!!!");
+        //         Console.WriteLine ("---------------------------------------------------");
+        //         Console.WriteLine ("Twoje statystyki: ");
+        //         Console.WriteLine ("Nazwa: "+myHero.name+ "\nHP Bohatera: "+myHero.hp+"\nMana Bohatera: "+myHero.mana);
+        //         Console.WriteLine ("---------------------------------------------------");
+        //         Console.WriteLine ("Statystyki Orka: ");
+        //         Console.WriteLine ("Nazwa wroga: "+ORK.Enemy_name+ "\nHP Wroga: "+ORK.Enemy_hp+"\nMana Wroga: "+ORK.Enemy_mana);
+        //         Console.WriteLine ("---------------------------------------------------");
 
-        // myHero.rycerz_historia(myHero, ORK, Mag, lucznik, rnd, sprzedawca);
-        if (rola=="rycerz"){
-                Console.WriteLine ("Trafiasz na Orka!!!");
-                Console.WriteLine ("---------------------------------------------------");
-                Console.WriteLine ("Twoje statystyki: ");
-                Console.WriteLine ("Nazwa: "+myHero.name+ "\nHP Bohatera: "+myHero.hp+"\nMana Bohatera: "+myHero.mana);
-                Console.WriteLine ("---------------------------------------------------");
-                Console.WriteLine ("Statystyki Orka: ");
-                Console.WriteLine ("Nazwa wroga: "+ORK.Enemy_name+ "\nHP Wroga: "+ORK.Enemy_hp+"\nMana Wroga: "+ORK.Enemy_mana);
-                Console.WriteLine ("---------------------------------------------------");
-
-                while (ORK.Enemy_hp>0){
-                    Console.WriteLine("Co robisz?");
-                    Console.WriteLine("Wpisz 1 Atak | 2 Plecak |");
-                    myHero.co_robisz = Convert.ToInt32(Console.ReadLine());
-                    if (myHero.co_robisz==1){
-                        Console.WriteLine("------------------------");
-                        Console.WriteLine("Atakujesz");
-                        Console.WriteLine("Życie Orka: " +ORK.Enemy_hp);
-                        myHero.attack(ORK);
-                        Console.WriteLine("Życie Orka: " +ORK.Enemy_hp);
-                        Console.WriteLine("------------------------");
-                        if (ORK.Enemy_hp>0){
-                            Console.WriteLine("------------------------");
-                            Console.WriteLine("Ork naciera!!!!");
-                            Console.WriteLine("Twoje życie: " +myHero.hp);
-                            ORK.attack(myHero);
-                            Console.WriteLine("Twoje życie: " +myHero.hp);
-                            Console.WriteLine("------------------------");
-                        }
-                    }
-                    if (myHero.co_robisz==2){
-                        Console.WriteLine("---------");
-                        Console.WriteLine(myHero.przedmioty);
-                        Console.WriteLine("---------");
-                    }
-                }
+        //         while (ORK.Enemy_hp>0){
+        //             Console.WriteLine("Co robisz?");
+        //             Console.WriteLine("Wpisz 1 Atak | 2 Plecak |");
+        //             myHero.co_robisz = Convert.ToInt32(Console.ReadLine());
+        //             if (myHero.co_robisz==1){
+        //                 Console.WriteLine("------------------------");
+        //                 Console.WriteLine("Atakujesz");
+        //                 Console.WriteLine("Życie Orka: " +ORK.Enemy_hp);
+        //                 myHero.attack(ORK);
+        //                 Console.WriteLine("Życie Orka: " +ORK.Enemy_hp);
+        //                 Console.WriteLine("------------------------");
+        //                 if (ORK.Enemy_hp>0){
+        //                     Console.WriteLine("------------------------");
+        //                     Console.WriteLine("Ork naciera!!!!");
+        //                     Console.WriteLine("Twoje życie: " +myHero.hp);
+        //                     ORK.attack(myHero);
+        //                     Console.WriteLine("Twoje życie: " +myHero.hp);
+        //                     Console.WriteLine("------------------------");
+        //                 }
+        //             }
+        //             if (myHero.co_robisz==2){
+        //                 Console.WriteLine("---------");
+        //                 Console.WriteLine(myHero.przedmioty);
+        //                 Console.WriteLine("---------");
+        //             }
+        //         }
                 
                 
-                Console.WriteLine("Ork pokonany");
-                int wypadlo = rnd.Next(5, 7);
-                Console.WriteLine("------------------------");
-                Console.WriteLine("Z Orka wypadło: "+wypadlo+" golda");
-                Console.WriteLine("------------------------");
-                myHero.gold += wypadlo ; 
-                Console.WriteLine ("Nazwa: "+myHero.name+ "\nHP Bohatera: "+myHero.hp+"\nMana Bohatera: "+myHero.mana+"\nIlosć golda: "+ myHero.gold);
+        //         Console.WriteLine("Ork pokonany");
+        //         int wypadlo = rnd.Next(5, 7);
+        //         Console.WriteLine("------------------------");
+        //         Console.WriteLine("Z Orka wypadło: "+wypadlo+" golda");
+        //         Console.WriteLine("------------------------");
+        //         myHero.gold += wypadlo ; 
+        //         Console.WriteLine ("Nazwa: "+myHero.name+ "\nHP Bohatera: "+myHero.hp+"\nMana Bohatera: "+myHero.mana+"\nIlosć golda: "+ myHero.gold);
 
-                Console.WriteLine ("Przed kolejnym orkiem trafiasz na nikogo innego jak ducha starego poległego bohatera któremu nie udało pokonać się wroga");
-                while (myHero.petla==1){   
-                    Console.WriteLine ("Oferuje on tobie | 1 Hp potion | 2 Ulepszenie ataku | 3 Idź dalej |");
-                    myHero.co_robisz = 0;
-                    myHero.co_robisz = Convert.ToInt32(Console.ReadLine());
-                    if (myHero.co_robisz==1){
-                        myHero.co_robisz = 0;
-                        Console.WriteLine("Uwaga jeżeli wypijesz hp potion twoje zdrowie nie zwiększy niż ponad maksymalne");
-                        Console.WriteLine("Czy chcesz zobaczyć swoje statystki?");
-                        myHero.ktore="nic";
-                        myHero.ktore=Console.ReadLine();
-                        if (myHero.ktore=="tak"){
-                            Console.WriteLine ("Nazwa: "+myHero.name+ "\nHP Bohatera: "+myHero.hp+"\nMana Bohatera: "+myHero.mana+"\nIlosć golda: "+ myHero.gold);
-                        }
-                        Console.WriteLine("Czy chcesz dokonać zakupu?");
-                        myHero.ktore="nic";
-                        myHero.ktore=Console.ReadLine();
-                        if (myHero.ktore=="tak"){
-                            myHero.hp += sprzedawca.hp_potion;
-                            Console.WriteLine ("Nazwa: "+myHero.name+ "\nHP Bohatera: "+myHero.hp+"\nMana Bohatera: "+myHero.mana+"\nIlosć golda: "+ myHero.gold);
-                            myHero.gold -= 20 ; 
-                        }
-                        if (myHero.ktore=="nie"){
-                            myHero.petla=0;
-                        }
+        //         Console.WriteLine ("Przed kolejnym orkiem trafiasz na nikogo innego jak ducha starego poległego bohatera któremu nie udało pokonać się wroga");
+        //         while (myHero.petla==1){   
+        //             Console.WriteLine ("Oferuje on tobie | 1 Hp potion | 2 Ulepszenie ataku | 3 Idź dalej |");
+        //             myHero.co_robisz = 0;
+        //             myHero.co_robisz = Convert.ToInt32(Console.ReadLine());
+        //             if (myHero.co_robisz==1){
+        //                 myHero.co_robisz = 0;
+        //                 Console.WriteLine("Uwaga jeżeli wypijesz hp potion twoje zdrowie nie zwiększy niż ponad maksymalne");
+        //                 Console.WriteLine("Czy chcesz zobaczyć swoje statystki?");
+        //                 myHero.ktore="nic";
+        //                 myHero.ktore=Console.ReadLine();
+        //                 if (myHero.ktore=="tak"){
+        //                     Console.WriteLine ("Nazwa: "+myHero.name+ "\nHP Bohatera: "+myHero.hp+"\nMana Bohatera: "+myHero.mana+"\nIlosć golda: "+ myHero.gold);
+        //                 }
+        //                 Console.WriteLine("Czy chcesz dokonać zakupu?");
+        //                 myHero.ktore="nic";
+        //                 myHero.ktore=Console.ReadLine();
+        //                 if (myHero.ktore=="tak"){
+        //                     myHero.hp += sprzedawca.hp_potion;
+        //                     Console.WriteLine ("Nazwa: "+myHero.name+ "\nHP Bohatera: "+myHero.hp+"\nMana Bohatera: "+myHero.mana+"\nIlosć golda: "+ myHero.gold);
+        //                     myHero.gold -= 20 ; 
+        //                 }
+        //                 if (myHero.ktore=="nie"){
+        //                     myHero.petla=0;
+        //                 }
 
                         
-                    }
-                }
+        //             }
+        //         }
 
-            myHero.petla=1;
-            }
+        //     myHero.petla=1;
+        //     }
    
         // if (rola=="mag"){
             
