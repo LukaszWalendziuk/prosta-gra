@@ -30,6 +30,7 @@ namespace klasa_rycerz
         
         public void rycerz_historia(Enemy ORK, Random rnd, duch_lochow sprzedawca, wybor te_czy_te){
             if (te_czy_te.rola=="rycerz"){
+                Console.WriteLine ("\n\n\n\n\n\n\n\n\n\n");
                 Console.WriteLine ("Trafiasz na Orka!!!");
                 Console.WriteLine ("---------------------------------------------------");
                 Console.WriteLine ("Twoje statystyki: ");

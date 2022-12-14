@@ -161,7 +161,59 @@ public class Program
 
         
         te_czy_te.selectRole(myHero, Mag, lucznik);
-        myHero.rycerz_historia(ORK, rnd, sprzedawca, te_czy_te);
+        if (te_czy_te.rola=="rycerz"){
+                int redo = 0;
+                int width = 15;
+                int height = 10;
+
+                ConsoleKeyInfo KeyInfo;
+                do
+                {
+                    string text = System.IO.File.ReadAllText(@"/home/ukasz/C# programy/MyApp/mapa.txt");
+
+
+                    KeyInfo = Console.ReadKey(true);
+                    Console.Clear();
+                    Console.SetCursorPosition(5, 5);
+                    Console.WriteLine(text);
+
+                    Console.SetCursorPosition(22, 15);
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.Write('W');
+                
+
+
+                    switch (KeyInfo.Key)
+
+                    {
+                        case ConsoleKey.RightArrow:
+                            width++;
+                            Console.SetCursorPosition(width, height);
+                            Console.Write("X");
+                            break;
+                        case ConsoleKey.LeftArrow:
+                            width--;
+                            Console.SetCursorPosition(width, height);
+                            Console.Write("X");
+                            break;
+                        case ConsoleKey.UpArrow:
+                            height--;
+                            Console.SetCursorPosition(width, height);
+                            Console.Write("X");
+                            break;
+                        case ConsoleKey.DownArrow:
+                            height++;
+                            Console.SetCursorPosition(width, height);
+                            Console.Write("X");
+                            break;
+                    }
+                    if (width==22 && height == 15){
+                        myHero.rycerz_historia(ORK, rnd, sprzedawca, te_czy_te);
+                    }
+                }while (redo == 0);
+
+            
+        }
         // if (te_czy_te.rola=="rycerz"){
         //         Console.WriteLine ("Trafiasz na Orka!!!");
         //         Console.WriteLine ("---------------------------------------------------");
